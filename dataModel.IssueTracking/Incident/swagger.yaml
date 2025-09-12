@@ -1,0 +1,98 @@
+openapi: "3.0.0"
+
+info:
+  description: |
+    This entity contains a description of an Incident (non-emergency), 
+    which can be reported, tracked, and managed within an IssueTracking system.
+    It is based on the Smart Data Models framework and extended with new fields 
+    such as `assignedTo`, `expectedResponseTime`, `images`, `notes`, `reportedById`, 
+    `severity`, and `urgencyLevel`.
+  title: Incident
+  version: "0.0.1"
+
+components:
+  schemas: 
+    Incident:
+      type: object
+      description: |
+        An Incident reported by a user, organization, or system. 
+        It is designed for issue reporting and tracking (non-emergency context).
+        This data model has been developed based on the Smart Data Models methodology.
+      allOf:
+        - $ref: "https://raw.githubusercontent.com/smart-data-models/dataModel.IssueTracking/master/IssueReporting/schema.json#/IssueReporting"
+      properties:
+        assignedTo:
+          x-ngsi:
+            type: Property
+          type: string
+          description: "Identifier of the user, group, or department assigned to handle the incident."
+        expectedResponseTime:
+          x-ngsi:
+            type: Property
+          type: string
+          format: date-time
+          description: "The expected response time to start handling the incident."
+        images:
+          x-ngsi:
+            type: Property
+          type: array
+          items:
+            type: string
+            format: uri
+          description: "List of image URLs related to the incident."
+        notes:
+          x-ngsi:
+            type: Property
+          type: string
+          description: "Additional free-text notes about the incident."
+        reportedById:
+          x-ngsi:
+            type: Relationship
+          type: string
+          description: "Identifier of the entity (user, organization, or device) that reported the incident."
+        severity:
+          x-ngsi:
+            type: Property
+          type: string
+          enum: [low, medium, high, critical]
+          description: "Severity level of the incident."
+        urgencyLevel:
+          x-ngsi:
+            type: Property
+          type: string
+          enum: [low, medium, high]
+          description: "Urgency of the incident handling."
+
+paths: 
+  /ngsi-ld/v1/entities: 
+    get: 
+      description: "Retrieve a set of Incident entities that match a specific query from an NGSI-LD system."
+      parameters: 
+        - in: query
+          name: type
+          required: true
+          schema: 
+            enum: 
+              - Incident
+            type: string
+      responses: 
+        "200":
+          description: OK
+          content: 
+            application/ld+json: 
+              examples: 
+                keyvalues: 
+                  summary: "Key-Values Pairs"
+                  value: 
+                    - $ref: "https://smart-data-models.github.io/dataModel.IssueTracking/Incident/examples/example.json"
+                normalized: 
+                  summary: "Normalized NGSI-LD"
+                  value: 
+                    - $ref: "https://smart-data-models.github.io/dataModel.IssueTracking/Incident/examples/example-normalized.jsonld"
+      tags: 
+        - ngsi-ld
+
+tags: 
+  - 
+    description: "NGSI-LD Linked-data Format"
+    name: ngsi-ld

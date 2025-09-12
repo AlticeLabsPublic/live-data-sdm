@@ -1,0 +1,223 @@
+Incident:
+  description: An incident report for non-emergency occurrences, based on FIWARE Smart Data Models and NGSI-LD.
+  properties:
+    id:
+      description: Unique identifier of the entity
+      type: string
+      format: uri
+      x-ngsi:
+        type: Property
+    type:
+      description: NGSI Entity type. It has to be Incident
+      enum:
+        - Incident
+      type: string
+      x-ngsi:
+        type: Property
+    address:
+      description: Address associated with the incident
+      type: object
+      properties:
+        addressCountry:
+          type: string
+          description: Country
+          x-ngsi:
+            model: https://schema.org/addressCountry
+            type: Property
+        addressLocality:
+          type: string
+          description: Locality/city
+          x-ngsi:
+            model: https://schema.org/addressLocality
+            type: Property
+        addressRegion:
+          type: string
+          description: Region
+          x-ngsi:
+            model: https://schema.org/addressRegion
+            type: Property
+        postalCode:
+          type: string
+          description: Postal code
+          x-ngsi:
+            model: https://schema.org/postalCode
+            type: Property
+        streetAddress:
+          type: string
+          description: Street address
+          x-ngsi:
+            model: https://schema.org/streetAddress
+            type: Property
+      x-ngsi:
+        model: https://schema.org/address
+        type: Property
+    assignedTo:
+      description: Department/organization responsible for handling the incident
+      type: string
+      format: uri
+      x-ngsi:
+        type: Relationship
+    category:
+      description: Main category of the incident
+      type: string
+      enum:
+        - infrastructure
+        - environment
+        - security
+        - cleanliness
+        - publicServices
+        - other
+      x-ngsi:
+        type: Property
+    dateCreated:
+      description: Entity creation timestamp (ISO8601 UTC)
+      type: string
+      format: date-time
+      x-ngsi:
+        model: https://schema.org/DateTime
+        type: Property
+    dateModified:
+      description: Last modification timestamp (ISO8601 UTC)
+      type: string
+      format: date-time
+      x-ngsi:
+        model: https://schema.org/DateTime
+        type: Property
+    description:
+      description: Textual description of the incident
+      type: string
+      x-ngsi:
+        model: https://schema.org/Text
+        type: Property
+    expectedResponseTime:
+      description: Expected response time
+      type: string
+      format: date-time
+      x-ngsi:
+        model: https://schema.org/Text
+        type: Property
+    images:
+      description: List of image URLs associated with the incident
+      type: array
+      items:
+        type: string
+        format: uri
+      x-ngsi:
+        model: https://schema.org/URL
+        type: Property
+    location:
+      description: GeoJSON reference to the incident location
+      oneOf:
+        - $ref: "https://geojson.org/schema/Point.json"
+        - $ref: "https://geojson.org/schema/LineString.json"
+        - $ref: "https://geojson.org/schema/Polygon.json"
+        - $ref: "https://geojson.org/schema/MultiPoint.json"
+        - $ref: "https://geojson.org/schema/MultiLineString.json"
+        - $ref: "https://geojson.org/schema/MultiPolygon.json"
+      x-ngsi:
+        type: GeoProperty
+      required:
+        - coordinateSystem
+    name:
+      description: Name of the incident
+      type: string
+      x-ngsi:
+        model: https://schema.org/Text
+        type: Property
+    notes:
+      description: Additional notes
+      type: string
+      x-ngsi:
+        model: https://schema.org/Text
+        type: Property
+    reportedById:
+      description: Identifier of the authenticated reporting user
+      type: string
+      format: uri
+      x-ngsi:
+        type: Relationship
+    severity:
+      description: Severity level of the incident
+      type: string
+      enum:
+        - low
+        - moderate
+        - high
+        - critical
+      x-ngsi:
+        model: https://schema.org/Text
+        type: Property
+    source:
+      description: System or entity that created the incident
+      type: string
+      format: uri
+      x-ngsi:
+        model: https://schema.org/URL
+        type: Property
+    status:
+      description: Current status of the incident
+      type: string
+      enum:
+        - open
+        - inProgress
+        - resolved
+        - closed
+        - cancelled
+      x-ngsi:
+        model: https://schema.org/Text
+        type: Property
+    subCategory:
+      description: Specific subcategory of the incident, depending on main category
+      type: string
+      enum:
+        - sidewalk_damage
+        - road_pothole
+        - street_light_failure
+        - traffic_signal_malfunction
+        - fallen_tree
+        - sidewalk_obstruction
+        - construction_hazard
+        - illegal_dumping
+        - garbage_overflow
+        - pest_problem
+        - water_leak
+        - noise_pollution
+        - air_quality
+        - vegetation_issue
+        - garbage_bin_full
+        - street_cleaning_needed
+        - graffiti
+        - abandoned_vehicle
+        - animal_waste
+        - littering
+        - public_transport_issue
+        - parking_violation
+        - missing_signage
+        - damaged_public_furniture
+        - playground_equipment_damage
+        - accessibility_issue
+      x-ngsi:
+        type: Property
+    urgencyLevel:
+      description: Priority classification of the incident
+      type: string
+      enum:
+        - P1
+        - P2
+        - P3
+        - P4
+      x-ngsi:
+        model: https://schema.org/Text
+        type: Property
+  required:
+    - id
+    - type
+    - dateCreated
+    - location
+    - status
+    - category
+  type: object
+  x-derived-from: ""
+  x-disclaimer: 'Redistribution and use in source and binary forms, with or without modification, are permitted provided that the license conditions are met.'
+  x-model-tags: ""
+  x-version: 0.1.0
