@@ -19,7 +19,7 @@ components:
         It is designed for issue reporting and tracking (non-emergency context).
         This data model has been developed based on the Smart Data Models methodology.
       allOf:
-        - $ref: "https://raw.githubusercontent.com/smart-data-models/dataModel.IssueTracking/master/IssueReporting/schema.json#/IssueReporting"
+        - $ref: "https://raw.githubusercontent.com/smart-data-models/dataModel.IssueTracking/master/IssueReporting/schema.json"
       properties:
         assignedTo:
           x-ngsi:
