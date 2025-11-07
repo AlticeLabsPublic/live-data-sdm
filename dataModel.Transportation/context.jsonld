@@ -101,6 +101,13 @@
         "reversedLane": "fiware:reversedLane",
         "streetAddress": "fiware:streetAddress",
         "streetNr": "fiware:streetNr",
-        "peopleCount": "fiware:peopleCount"
+        "peopleCount": "fiware:peopleCount",
+        "allowedVehicleType": "fiware:allowedVehicleType",
+        "capacity": "fiware:capacity",
+        "socketType": "fiware:socketType",
+        "voltage": "fiware:voltage",
+        "powerConsumption": "fiware:powerConsumption",
+        "availableCapacity": "fiware:availableCapacity",
+        "amperage": "fiware:amperage"
     }
 }
